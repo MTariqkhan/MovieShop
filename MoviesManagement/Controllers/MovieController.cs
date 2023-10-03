@@ -62,9 +62,9 @@ namespace MovieStoreMvc.Controllers
         public IActionResult Edit(int id)
         {
             var model = _movieService.GetById(id);
-            var selectedGenres = _movieService.GetGenreByMovieId(model.Id);
-            MultiSelectList multiGenreList = new MultiSelectList(_genService.List(), "Id", "GenreName", selectedGenres);
-            model.MultiGenreList = multiGenreList;
+            //var selectedGenres = _movieService.GetGenreByMovieId(model.Id);
+            //MultiSelectList multiGenreList = new MultiSelectList(_genService.List(), "Id", "GenreName", selectedGenres);
+            //model.MultiGenreList = multiGenreList;
             return View(model);
         }
 

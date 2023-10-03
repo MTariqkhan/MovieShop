@@ -32,11 +32,13 @@
     <Folder Include="wwwroot\lib\" />
     <Folder Include="Views\Genre\" />
     <Folder Include="Views\Movie\" />
+    <Folder Include="wwwroot\Uploads\" />
   </ItemGroup>
   <ItemGroup>
     <Content Remove="wwwroot\css\" />
     <Content Remove="wwwroot\js\" />
     <Content Remove="wwwroot\lib\" />
+    <Content Remove="wwwroot\Uploads\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="6.0.22" />

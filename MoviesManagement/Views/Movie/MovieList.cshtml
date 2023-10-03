@@ -25,7 +25,7 @@
                 <td>@item.Cast</td>
                 <td>@item.Director</td>
                 <td>
-                    <a href="@Url.Action("Update", "Movie", new { id = item.Id })" class="btn btn-default"><i class="fa fa-edit"></i></a>
+                    <a href="@Url.Action("Edit", "Movie", new { id = item.Id })" class="btn btn-default"><i class="fa fa-edit"></i></a>
                     <a onclick="return window.confirm('Are you sure?')" href="@Url.Action("Delete", "Movie", new { id = item.Id })" class="btn btn-danger"><i class="fa fa-trash"></i></a>
                 </td>
             </tr>

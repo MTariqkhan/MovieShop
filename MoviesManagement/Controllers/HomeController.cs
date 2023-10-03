@@ -6,16 +6,15 @@ namespace MoviesManagement.Controllers;
 
 public class HomeController : Controller
 {
-    private readonly IMovieService movieObject;
-
-    public HomeController(IMovieService movieObject)
+    
+    private readonly IMovieService _movieService;
+    public HomeController(IMovieService movieService)
     {
-        this.movieObject = movieObject;
+        _movieService = movieService;
     }
-
-    public IActionResult Index()
+    public IActionResult Index(string term = "", int currentPage = 1)
     {
-        var movies = movieObject.List();
+        var movies = _movieService.List(term, true, currentPage);
         return View(movies);
     }
 
@@ -23,5 +22,12 @@ public class HomeController : Controller
     {
         return View();
     }
+
+    public IActionResult MovieDetail(int movieId)
+    {
+        var movie = _movieService.GetById(movieId);
+        return View(movie);
+    }
+
 }
 

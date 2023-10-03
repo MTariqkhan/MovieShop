@@ -1,0 +1,49 @@
+﻿@model MoviesManagement.Models.DTO.RegistrationModel
+@{
+}
+<form class="w-40" asp-controller="UserAuthentication" asp-action="Register" method="post">
+    <h2 class="pb-10">Registration</h2>
+
+    <div class="input-container">
+        <label asp-for="Name" class="w-40">Name</label>
+        <input type="text" class="input" asp-for="Name">
+    </div>
+    <div class="message-box pd-x-28 error">
+        <span asp-validation-for="Name"></span>
+    </div>
+    <div class="input-container">
+        <label asp-for="Username" class="w-40">Username</label>
+        <input type="text" class="input" asp-for="Username">
+    </div>
+    <div class="message-box pd-x-28 error">
+        <span asp-validation-for="Username"></span>
+    </div>
+
+    <div class="input-container">
+        <label asp-for="Email" class="w-40">Email</label>
+        <input type="email" class="input" asp-for="Email">
+    </div>
+    <div class="message-box pd-x-28 error">
+        <span asp-validation-for="Email"></span>
+    </div>
+
+    <div class="input-container">
+        <label asp-for="Password" class="w-40">Password</label>
+        <input type="password" class="input" asp-for="Password">
+    </div>
+    <div class="message-box pd-x-28 error">
+        <span asp-validation-for="Password"></span>
+    </div>
+
+    <div class="input-container">
+        <label asp-for="PasswordConfirm" class="w-40">Confirm Password</label>
+        <input type="password" class="input" asp-for="PasswordConfirm">
+    </div>
+    <div class="message-box pd-x-28 error">
+        <span asp-validation-for="PasswordConfirm"></span>
+    </div>
+
+    <div class="input-container">
+        <button class="btn btn-default" type="submit">Register</button>
+    </div>
+</form>

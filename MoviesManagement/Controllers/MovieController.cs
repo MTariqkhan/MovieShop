@@ -6,7 +6,9 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using MoviesManagement.Models.Domain;
+using MoviesManagement.Models.DTO;
 using MoviesManagement.Repositoriy.Abstraction;
+using MoviesManagement.Repositoriy.Implementation;
 
 namespace MovieStoreMvc.Controllers
 {
@@ -62,14 +64,14 @@ namespace MovieStoreMvc.Controllers
         public IActionResult Edit(int id)
         {
             var model = _movieService.GetById(id);
-            //var selectedGenres = _movieService.GetGenreByMovieId(model.Id);
-            //MultiSelectList multiGenreList = new MultiSelectList(_genService.List(), "Id", "GenreName", selectedGenres);
-            //model.MultiGenreList = multiGenreList;
+            var selectedGenres = _movieService.GetGenreByMovieId(model.Id);
+            MultiSelectList multiGenreList = new MultiSelectList(_genService.List(), "Id", "GenreName", selectedGenres);
+            model.MultiGenreList = multiGenreList;
             return View(model);
         }
 
         [HttpPost]
-        public IActionResult Edit(Movie model)
+        public IActionResult Update(Movie model)
         {
             var selectedGenres = _movieService.GetGenreByMovieId(model.Id);
             MultiSelectList multiGenreList = new MultiSelectList(_genService.List(), "Id", "GenreName", selectedGenres);

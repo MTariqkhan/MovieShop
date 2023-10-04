@@ -10,6 +10,7 @@
             <th>Name</th>
             <th>Latitude</th>
             <th>Longitude</th>
+            <th>Location</th>
             <th>Action</th>
         </tr>
         @foreach (var item in Model)
@@ -18,11 +19,33 @@
                 <td>@item.Name</td>
                 <td>@item.Latitude</td>
                 <td>@item.Longitude</td>
+                <td id="map_@item.Id" class="cinema-map"></td>
                 <td>
                     <a href="@Url.Action("Edit", "Cinema", new { id = item.Id })" class="btn btn-default"><i class="fa fa-edit"></i></a>
                     <a onclick="return window.confirm('Are you sure?')" href="@Url.Action("Delete", "Cinema", new { id = item.Id })" class="btn btn-danger"><i class="fa fa-trash"></i></a>
                 </td>
             </tr>
+
+            <script>
+                var latitude_@item.Id = @item.Latitude;
+                var longitude_@item.Id = @item.Longitude;
+
+                function initMap() {
+                    const cinemaLocation = { lat: latitude_@item.Id, lng: longitude_@item.Id };
+                    const map = new google.maps.Map(document.getElementById('map_@item.Id'), {
+                        center: cinemaLocation,
+                        zoom: 15
+                    });
+
+                    new google.maps.Marker({
+                        position: cinemaLocation,
+                        map: map,
+                        title: '@item.Name'
+                    });
+                }
+
+                initMap();
+            </script>
         }
 
     </table>
@@ -38,3 +61,4 @@
         <a asp-controller="Cinema" asp-action="Add" class="btn btn-sec">Add New</a>
     </div>
 </div>
+

@@ -29,5 +29,10 @@ public class HomeController : Controller
         return View(movie);
     }
 
+    public IActionResult NotAuthorized()
+    {
+        return View();
+    }
+
 }
 

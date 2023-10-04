@@ -12,7 +12,7 @@ using MoviesManagement.Repositoriy.Implementation;
 
 namespace MovieStoreMvc.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = "Admin")]
     public class MovieController : Controller
     {
         private readonly IMovieService _movieService;
@@ -24,6 +24,7 @@ namespace MovieStoreMvc.Controllers
             _fileService = fileService;
             _genService = genService;
         }
+        
         public IActionResult Add()
         {
             var model = new Movie();

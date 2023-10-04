@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
 using MoviesManagement.Models.Domain;
 using MoviesManagement.Repositoriy;
 using MoviesManagement.Repositoriy.Abstraction;
@@ -21,7 +22,13 @@ builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
     .AddEntityFrameworkStores<DatabaseContext>()
     .AddDefaultTokenProviders();
 
-//builder.Services.ConfigureApplicationCookie(options => options.LoginPath = "/UserAuthentication/Login");
+builder.Services.ConfigureApplicationCookie(options =>
+{
+    options.LoginPath = "/UserAuthentication/Login";
+    options.AccessDeniedPath = "/Home/NotAuthorized";
+
+});
+
 var app = builder.Build();
 
 if (!app.Environment.IsDevelopment())

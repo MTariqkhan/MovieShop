@@ -9,7 +9,7 @@ using MoviesManagement.Repositoriy.Abstraction;
 
 namespace MoviesManagement.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = "Admin")]
     public class GenreController : Controller
     {
         private readonly IGenreService _genreService;

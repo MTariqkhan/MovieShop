@@ -7,18 +7,18 @@ namespace MoviesManagement.Repositoriy.Implementation
 {
     public class MovieService : IMovieService
     {
-        private readonly DatabaseContext ctx;
+        private readonly DatabaseContext _ctx;
         public MovieService(DatabaseContext ctx)
         {
-            this.ctx = ctx;
+            _ctx = ctx;
         }
         public bool Add(Movie model)
         {
             try
             {
 
-                ctx.Movie.Add(model);
-                ctx.SaveChanges();
+                _ctx.Movie.Add(model);
+                _ctx.SaveChanges();
                 foreach (int genreId in model.Genres)
                 {
                     var movieGenre = new MovieGenre
@@ -26,9 +26,9 @@ namespace MoviesManagement.Repositoriy.Implementation
                         MovieId = model.Id,
                         GenreId = genreId
                     };
-                    ctx.MovieGenre.Add(movieGenre);
+                    _ctx.MovieGenre.Add(movieGenre);
                 }
-                ctx.SaveChanges();
+                _ctx.SaveChanges();
                 return true;
             }
             catch (Exception ex)
@@ -44,13 +44,13 @@ namespace MoviesManagement.Repositoriy.Implementation
                 var data = this.GetById(id);
                 if (data == null)
                     return false;
-                var movieGenres = ctx.MovieGenre.Where(a => a.MovieId == data.Id);
+                var movieGenres = _ctx.MovieGenre.Where(a => a.MovieId == data.Id);
                 foreach (var movieGenre in movieGenres)
                 {
-                    ctx.MovieGenre.Remove(movieGenre);
+                    _ctx.MovieGenre.Remove(movieGenre);
                 }
-                ctx.Movie.Remove(data);
-                ctx.SaveChanges();
+                _ctx.Movie.Remove(data);
+                _ctx.SaveChanges();
                 return true;
             }
             catch (Exception ex)
@@ -61,14 +61,14 @@ namespace MoviesManagement.Repositoriy.Implementation
 
         public Movie GetById(int id)
         {
-            return ctx.Movie.Find(id);
+            return _ctx.Movie.Find(id);
         }
 
         public MovieListVm List(string term = "", bool paging = false, int currentPage = 0)
         {
             var data = new MovieListVm();
 
-            var list = ctx.Movie.ToList();
+            var list = _ctx.Movie.ToList();
 
 
             if (!string.IsNullOrEmpty(term))
@@ -91,8 +91,8 @@ namespace MoviesManagement.Repositoriy.Implementation
 
             foreach (var movie in list)
             {
-                var genres = (from genre in ctx.Genre
-                              join mg in ctx.MovieGenre
+                var genres = (from genre in _ctx.Genre
+                              join mg in _ctx.MovieGenre
                               on genre.Id equals mg.GenreId
                               where mg.MovieId == movie.Id
                               select genre.GenreName
@@ -110,24 +110,24 @@ namespace MoviesManagement.Repositoriy.Implementation
             {
                 // these genreIds are not selected by users and still present is movieGenre table corresponding to
                 // this movieId. So these ids should be removed.
-                var genresToDeleted = ctx.MovieGenre.Where(a => a.MovieId == model.Id && !model.Genres.Contains(a.GenreId)).ToList();
+                var genresToDeleted = _ctx.MovieGenre.Where(a => a.MovieId == model.Id && !model.Genres.Contains(a.GenreId)).ToList();
                 foreach (var mGenre in genresToDeleted)
                 {
-                    ctx.MovieGenre.Remove(mGenre);
+                    _ctx.MovieGenre.Remove(mGenre);
                 }
                 foreach (int genId in model.Genres)
                 {
-                    var movieGenre = ctx.MovieGenre.FirstOrDefault(a => a.MovieId == model.Id && a.GenreId == genId);
+                    var movieGenre = _ctx.MovieGenre.FirstOrDefault(a => a.MovieId == model.Id && a.GenreId == genId);
                     if (movieGenre == null)
                     {
                         movieGenre = new MovieGenre { GenreId = genId, MovieId = model.Id };
-                        ctx.MovieGenre.Add(movieGenre);
+                        _ctx.MovieGenre.Add(movieGenre);
                     }
                 }
 
-                ctx.Movie.Update(model);
+                _ctx.Movie.Update(model);
                 // we have to add these genre ids in movieGenre table
-                ctx.SaveChanges();
+                _ctx.SaveChanges();
                 return true;
             }
             catch (Exception ex)
@@ -138,7 +138,7 @@ namespace MoviesManagement.Repositoriy.Implementation
 
         public List<int> GetGenreByMovieId(int movieId)
         {
-            var genreIds = ctx.MovieGenre.Where(a => a.MovieId == movieId).Select(a => a.GenreId).ToList();
+            var genreIds = _ctx.MovieGenre.Where(a => a.MovieId == movieId).Select(a => a.GenreId).ToList();
             return genreIds;
         }
 

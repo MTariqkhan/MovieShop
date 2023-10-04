@@ -4,6 +4,7 @@ using MoviesManagement.Repositoriy.Abstraction;
 
 namespace MoviesManagement.Controllers;
 
+
 public class HomeController : Controller
 {
     
@@ -22,10 +23,9 @@ public class HomeController : Controller
     {
         return View();
     }
-
-    public IActionResult MovieDetail(int movieId)
+    public IActionResult MovieDetail(int Id)
     {
-        var movie = _movieService.GetById(movieId);
+        var movie = _movieService.GetById(Id);
         return View(movie);
     }
 

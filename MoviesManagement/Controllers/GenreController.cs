@@ -47,7 +47,7 @@ namespace MoviesManagement.Controllers
         }
 
         [HttpPost]
-        public IActionResult Update(Genre model)
+        public IActionResult Edit(Genre model)
         {
             if (!ModelState.IsValid)
                 return View(model);

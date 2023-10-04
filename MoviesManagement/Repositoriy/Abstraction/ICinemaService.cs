@@ -9,6 +9,7 @@ namespace MoviesManagement.Repositoriy.Abstraction
         bool Update(Cinema model);
         Cinema GetById(int id);
         bool Delete(int id);
+        IQueryable<Cinema> List();
     }
 }
 

@@ -39,14 +39,11 @@ namespace MoviesManagement.Repositoriy.Implementation
             _databaseContext.SaveChanges();
             return true;
         }
+
+        public IQueryable<Cinema> List()
+        {
+            var data = _databaseContext.Cinema.AsQueryable();
+            return data;
+        }
     }
 }
-
-
-
-
-
-//bool Add(Cinema model);
-//bool Update(Cinema model);
-//Cinema GetById(int id);
-//bool Delete(int id);

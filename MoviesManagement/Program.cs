@@ -13,6 +13,7 @@ builder.Services.AddScoped<IUserAuthenticationService, UserAuthenticationService
 builder.Services.AddScoped<IGenreService, GenreService>();
 builder.Services.AddScoped<IFileService, FileService>();
 builder.Services.AddScoped<IMovieService, MovieService>();
+builder.Services.AddScoped<ICinemaService, CinemaService>();
 
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
 builder.Services.AddDbContext<DatabaseContext>(options =>

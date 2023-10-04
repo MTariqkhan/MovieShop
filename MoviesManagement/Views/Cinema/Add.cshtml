@@ -1,0 +1,44 @@
+﻿@model MoviesManagement.Models.Domain.Cinema
+@{
+}
+
+
+<form class="w-40" asp-action="Add" method="post">
+    <h2 class="pb-10">Add Movie</h2>
+
+    <div class="input-container">
+        <label asp-for="Name" class="w-40">Name</label>
+        <input type="text" class="input" asp-for="Name">
+    </div>
+    <div class="message-box pd-x-28 error">
+        <span asp-validation-for="Name"> </span>
+    </div>
+
+    <div class="input-container">
+        <label asp-for="Latitude" class="w-40">Latitude</label>
+        <input type="text" class="input" asp-for="Latitude">
+    </div>
+    <div class="message-box pd-x-28 error">
+        <span asp-validation-for="Latitude"> </span>
+    </div>
+
+    <div class="input-container">
+        <label asp-for="Longitude" class="w-40">Longitude</label>
+        <input type="text" class="input" asp-for="Longitude">
+    </div>
+    <div class="message-box pd-x-28 error">
+        <span asp-validation-for="Longitude"> </span>
+    </div>
+
+    @if (TempData["msg"] != null)
+    {
+        <div class="alert mb-1">
+            @TempData["msg"]
+        </div>
+    }
+
+    <div class="input-container">
+        <button class="btn btn-default" type="submit">Save</button>
+        <a class="btn btn-sec" asp-controller="Cinema" asp-action="Index">Back</a>
+    </div>
+</form>

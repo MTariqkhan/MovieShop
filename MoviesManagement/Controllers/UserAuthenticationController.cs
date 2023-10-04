@@ -10,10 +10,10 @@ namespace MoviesManagement.Controllers
 {
     public class UserAuthenticationController : Controller
     {
-        private IUserAuthenticationService authService;
+        private readonly IUserAuthenticationService _authService;
         public UserAuthenticationController(IUserAuthenticationService authService)
         {
-            this.authService = authService;
+            _authService = authService;
         }
 
         [HttpGet]
@@ -26,7 +26,7 @@ namespace MoviesManagement.Controllers
         public async Task<IActionResult> Register(RegistrationModel model)
         {
             model.Role = "User";
-            var result = await authService.RegisterAsync(model);
+            var result = await _authService.RegisterAsync(model);
             return Ok(result.Message);
         }
 
@@ -42,7 +42,7 @@ namespace MoviesManagement.Controllers
             if (!ModelState.IsValid)
                 return View(model);
 
-            var result = await authService.LoginAsync(model);
+            var result = await _authService.LoginAsync(model);
             if (result.StatusCode == 1)
                 return RedirectToAction("Index", "Home");
             else
@@ -54,7 +54,7 @@ namespace MoviesManagement.Controllers
 
         public async Task<IActionResult> Logout()
         {
-            await authService.LogoutAsync();
+            await _authService.LogoutAsync();
             return RedirectToAction(nameof(Login));
         }
     }

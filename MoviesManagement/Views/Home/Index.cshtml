@@ -14,15 +14,14 @@
     @foreach (var movie in Model.MovieList)
     {
         <div class="movie-card">
-            <a asp-action="MovieDetail" asp-route-id="@movie.Id">
-                <div class="movie-image">
-                    <img src="/Uploads/@movie.MovieImage">
-                </div>
-                <div class="movie-info">
-                    <h4>@movie.Title</h4>
-                    <h4>@movie.GenreNames</h4>
-                </div>
-            </a>
+            <div class="movie-image">
+                <a asp-action="MovieDetail" asp-route-id="@movie.Id"><img src="/Uploads/@movie.MovieImage"></a>
+            </div>
+            <div class="movie-info">
+                <h4>@movie.Title</h4>
+                <h4>@movie.Price</h4>
+                <h4>@movie.GenreNames</h4>
+            </div>
         </div>
     }
 </section>

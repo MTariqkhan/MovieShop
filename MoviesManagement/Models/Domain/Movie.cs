@@ -16,6 +16,8 @@ namespace MoviesManagement.Models.Domain
         [Required]
         public string? Cast { get; set; }
         [Required]
+        public double? Price { get; set; }
+        [Required]
         public string? Director { get; set; }
 
         [NotMapped]

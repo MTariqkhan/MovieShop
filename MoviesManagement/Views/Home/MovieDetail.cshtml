@@ -10,10 +10,12 @@
         <h3>@Model.Title</h3>
         <h4>@Model.GenreNames</h4>
         <h4>@Model.ReleaseYear</h4>
+        <h4>Price : @Model.Price</h4>
         <h4>Cast : @Model.Cast</h4>
         <h4>Director : @Model.Director</h4>
     </div>
 </div>
 <div class="w-80 m-auto">
+    <a asp-controller="Cart" asp-action="Add" class="btn btn-default">Add to Cart</a>
     <a asp-controller="Home" asp-action="Index" class="btn btn-default">Back</a>
 </div>

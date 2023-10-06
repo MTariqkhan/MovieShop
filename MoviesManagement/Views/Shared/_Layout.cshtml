@@ -28,7 +28,7 @@
             @if (User.IsInRole("Admin"))
             {
                 <li>
-                    <a href="#">Admin <i class="fa fa-caret-down"></i></a>
+                    <a href="#">Admin</a>
 
                     <ul class="dropdown-nav-link">
                         <li><a asp-controller="Genre" asp-action="GenreList">Genre</a></li>
@@ -44,7 +44,7 @@
             else
             {
                 <li>
-                    <a>@userName <i class="fa fa-caret-down"></i></a>
+                    <a>@userName</a>
                     <ul class="dropdown-nav-link">
                         <li><a asp-controller="UserAuthentication" asp-action="Logout">Logout</a></li>
                     </ul>
